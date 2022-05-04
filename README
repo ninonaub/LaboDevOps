@@ -1,1 +1,8 @@
 Hello
+
+execute :
+vagrant up 
+
+test:
+localhost:8080
+http://192.168.50.30/haproxy?stats
