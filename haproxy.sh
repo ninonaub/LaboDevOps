@@ -52,8 +52,23 @@ backend webservers
     option http-server-close
     server webserver1 192.168.50.10:80 check
     server webserver2 192.168.50.20:80 check
+
+
 EOF
+
+# frontend ssh-in
+#     bind *:2222
+#     default_backend dbservers
  
+# backend dbservers
+#     balance roundrobin
+#     stats enable
+#     stats auth admin:admin
+#     stats uri /haproxy?stats
+#     mode tcp
+#     server dbserver1 192.168.50.40:22 check
+
+
 echo -e "-- Validating HAProxy configuration\n"
 haproxy -f /etc/haproxy/haproxy.cfg -c
  
