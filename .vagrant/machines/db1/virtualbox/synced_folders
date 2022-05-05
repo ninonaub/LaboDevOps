@@ -1,0 +1,1 @@
+{"rsync":{"/vagrant":{"type":"rsync","guestpath":"/vagrant","hostpath":"/Users/admin/Desktop/AD10/LaboDevOps","disabled":false,"__vagrantfile":true,"owner":"vagrant","group":"vagrant"}},"virtualbox":{"/var/www/html":{"owner":"vagrant","group":"www-data","guestpath":"/var/www/html","hostpath":"/Users/admin/Desktop/AD10/LaboDevOps/db1","disabled":false,"__vagrantfile":true}}}
