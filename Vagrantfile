@@ -25,7 +25,7 @@ Vagrant.configure("2") do |config|
         web2.vm.box = 'debian/buster64'
             web2.vm.box_check_update = true
         web2.vm.hostname = "web2"
-        web2.vm.network "private_network", ip: "192.168.50.10"
+        web2.vm.network "private_network", ip: "192.168.50.20"
             web2.vm.synced_folder "../data", "/vagrant_data", disabled: true
         web2.vm.synced_folder "./web2", "/var/www/html", owner: "vagrant", group: "www-data"
         web2.vm.provision :shell, path: "webserver.sh"
