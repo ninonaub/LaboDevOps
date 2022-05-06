@@ -1,0 +1,168 @@
+AD10
+Système 
+
+Quel est le chemin du fichier permettant de connaître la version de DEBIAN ?
+-> cat /etc/os-release
+
+Quelle est la commande permettant de connaître la date et l’heure définie sur le système ?
+-> timedatetcl
+
+Quelle est la timezone du système ?
+UTC (Universal Time Coordinated)
+
+Quelle est la commande permettant de modifier la timezone du système ?
+-> timedatectl list-timezones (lists the timezones)
+or
+-> sudo timedatectl set-timezone America/Monterrey (sets new time zone)
+
+Quelle est la commande permettant de créer un fichier file.txt et son contenu « test » en une seule ligne ?
+-> echo test > text.txt
+
+Quelle est la commande permettant de connaître le nom du système (nom d’hôte) ?
+-> hostname
+or
+-> hostnamectl
+Quelle est la commande permettant de modifier le nom d’hôte du système ?
+-> sudo hostnamectl set-hostname nins
+
+Quelle est la commande permettant de redémarrer système ?
+-> sudo reboot
+
+Quelle est la commande permettant de savoir depuis combien de temps le système tourne ?
+-> uptime
+or
+->last reboot | head -1
+Quelle est la commande permettant de connaître l’espace disque disponible sur le système ?
+-> df 
+more specific
+-> df --output=source,avail
+
+Quelle est la commande permettant de connaître l’espace disque occupé par le répertoire /etc ?
+-> df -h /etc
+
+Quelle est la commande permettant de savoir si le service sshd est démarré ?
+-> ps aux | grep sshd
+ou
+-> sudo systemctl status sshd
+
+Quelle est la commande permettant de connaître le PID du service sshd ?
+-> cat /var/run/sshd.pid
+559
+
+Quelle est la commande permettant de tuer le processus sshd à l’aide de son PID ?
+-> kill -9 559
+
+Quelle est la commande permettant de connaître la liste des processus en cours ?
+-> ps aux
+
+Quelle est la commande permettant de connaître le nom de l’utilisateur actuellement connecté à la console ?
+-> whoami
+ou
+-> who
+
+Quelle est la commande permettant de connaître le nom de tous les utilisateurs actuellement connectés au système ?
+-> w
+
+Quelle est la commande permettant de lancer une commande avec les droits root sans être root ?
+-> sudo
+Quelle est la commande permettant d’éditer le fichier de définition des commandes exécutées périodiquement ?
+-> crontab -e
+
+Quelle est la commande permettant de vider l’historique de la ligne de commande de l’utilisateur en cours ?
+-> history -c
+
+Réseau 
+Quelle est la commande permettant de connaître le nom et l’adresse IP de l’interface ethernet ?
+-> ip addr show eth0
+
+Quelle est la commande permettant de connaître l’adresse IP de la passerelle (gateway) ? 
+-> ip route | grep default
+
+Quel est le chemin du fichier dans lequel sont définis les DNS ?
+-> cat /etc/resolv. conf
+
+Quelle est la commande permettant de connaître l’adresse IP du DNS racine pour le domaine www.it-akademy. fr ?
+-> host www.it-akademy.fr
+ou
+-> dig www.it-akademy.fr 
+ou plus court
+dig +short a www.it-akademy.fr 
+Quel est le nom du paquet que vous avez dû installer pour répondre à la question précédente ?
+Je n’ai rien eu à installer. 
+
+Quelle est la commande permettant de vérifier que la passerelle est accessible depuis la Debian ?
+-> ping 10.0.2.2
+
+Quelle est la commande permettant de connaître les adresses des équipements réseau entre la Debian et le serveur hébergeant it-akademy.fr ?
+-> traceroute www.it-akademy.fr
+
+• Quelle est la commande permettant de connaître le nom d’hôte de la machine hébergeant it-akademy.fr ?
+-> nslookup www.it-akademy.fr
+
+• Quel est le chemin du fichier local contenant des correspondances adresses IP / Nom de domaine ?
+-> cat /etc/hosts
+
+
+• Quelle est la commande permettant de faire pointer le domaine labo.it-akademy.fr vers l’adresse 127.0.0.1 ?
+-> sudo nano /etc/hosts (and change name next to 127.0.0.1)
+or 
+-> host labo.it-akademy.fr
+
+
+Scripting 
+
+Créer un script permettant, une fois exécuté, d’afficher la liste des fichiers triés par taille du répertoire /var/log.
+-> sudo nano test.sh
+#!/bin/bash
+ ls -laS /var/log
+-> bash test.sh
+
+Créer un script permettant, une fois exécuté, d’afficher la liste des fichiers triés par taille du répertoire passé en argument.
+#!/bin/bash
+ ls -laS $1
+-> bash test.sh /var/log 
+
+Créer un script permettant, une fois exécuté, de mettre à jour les dépôts de paquets Debian, puis de mettre à jour les paquets installés sur le système et de journaliser le tout dans le fichier /var/log/apt/updated.log
+
+#!/bin/bash
+sudo apt-get update && sudo apt-get upgrade >> /var/log/apt/updated.log
+
+-> sudo bash test.sh
+ 
+
+
+Sujet de laboratoire 
+Architecture d’hébergement
+
+Combien de machines sont nécessaires a minima pour mettre en œuvre cette architecture ? 
+
+6 en tout
+
+firewall et load balancer
+Webserver
+Webserver
+Bastion
+Backend db et log et monitoring
+Backend db
+
+À quel coût annuel estimez-vous cette architecture (matériel, infra et soft uniquement) ?
+
+Tout open source, pas de coût autre que l'hébergement et maintient donc 5000€ environ
+
+Avez-vous des remarques ou des propositions pour améliorer cette architecture ? Si oui, lesquelles ?
+
+Utiliser docker et kubernetes
+Changer de port ssh pour les vm privées.
+N’accepter que les publickeys.
+Avez-vous créé des scripts pour mettre en œuvre cette architecture ? Si oui, merci de les fournir.
+
+Oui ils sont dans le zip, un pour chaque type de vm 
+
+Quels aspects de cette architecture vous ont semblé les plus complexes à mettre en œuvre ?
+
+Le bastion a été très dur. Je n’ai pas réussi à trouver un paramétrage qui marche. Il y a beaucoup de manières différentes de faire, trop peu de temps pour réaliser un paramétrage réussi.
+
+Le wordpress en script 
+
+La longueur du lancement de machines et même des reloads était tellement longues que cela en est devenu frustrant.
+La configuration change en fonction des machines utilisées.

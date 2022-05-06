@@ -11,7 +11,7 @@ apt-get update -y -qq
  
 # HAPROXY ######################################################################
 echo -e "-- Installing HAProxy\n"
-apt-get install -y haproxy > /dev/null 2>&1
+sudo apt -y install haproxy 
  
 echo -e "-- Enabling HAProxy as a start-up deamon\n"
 cat > /etc/default/haproxy <<EOF
@@ -73,7 +73,7 @@ echo -e "-- Validating HAProxy configuration\n"
 haproxy -f /etc/haproxy/haproxy.cfg -c
  
 echo -e "-- Starting HAProxy\n"
-service haproxy start
+sudo systemctl restart haproxy
  
 # END ##########################################################################
 echo -e "-- ----------- --"

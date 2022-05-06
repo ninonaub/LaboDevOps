@@ -1,10 +1,10 @@
 Host		bastion
-User		admin
-Hostname	127.0.0.1
+User		vagrant
+Hostname	10.0.1.5
 Port 		22
 
-Host 192.168.50.*
-  User admin
+Host 10.0.1.*
+  User vagrant
   StrictHostKeyChecking no
   ControlPath ~/.ssh/controlmasters/%r@%h:%p
   ControlMaster auto
