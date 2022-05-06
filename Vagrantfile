@@ -32,7 +32,7 @@ Vagrant.configure("2") do |config|
 
         web2.vm.provider "virtualbox" do |vb|
             vb.customize ["modifyvm", :id, "--memory", "1024"]
-            vb.customize ["modifyvm", :id, "--name", "Frontend_1"]
+            vb.customize ["modifyvm", :id, "--name", "Frontend_2"]
                 vb.gui = false
         end
     end
